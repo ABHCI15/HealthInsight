@@ -34,13 +34,14 @@ def AIGen(sleep_csv):
 
 sleep_csv = st.file_uploader("Choose a csv file", type="csv", help="Upload a csv file with sleep data from fitbit")
 
+# makes sure a csv file is uploaded
 if sleep_csv is not None:
-    buttonAiGen = st.button("Generate Gemini Insight")
+    buttonAiGen = st.button("Generate Gemini Insight") 
     buttonGraph = st.button("Generate Graphs")
     if buttonGraph:
         df = pd.read_csv(sleep_csv, skiprows=1)
-        st.scatter_chart(df, x="Number of Awakenings", y="Time in Bed")
+        st.scatter_chart(df, x="Number of Awakenings", y="Time in Bed") # a simple template scatter chart
     if buttonAiGen:
-        AIGen(sleep_csv)
+        AIGen(sleep_csv) # uses gemini to query the pandas object and analyzes the file
 
 

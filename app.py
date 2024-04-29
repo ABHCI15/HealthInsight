@@ -5,9 +5,7 @@ import textwrap
 import firebase_authfunctions as auth_functions
 
 st.set_page_config(layout="wide", page_title="Login - HealthInsight", page_icon="🩺")
-# AIzaSyAC2aMax9s7ev0ZGRFvNn6YlsrkM2c5ahc
-# genai.configure(api_key=st.secrets["api_key"])
-# model = genai.GenerativeModel('gemini-pro')
+
 
 st.title("HealthInsight V 0.01.0")
 st.header("Login to access the app")
