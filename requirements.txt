@@ -6,3 +6,7 @@ numpy
 plotly
 google-cloud-firestore
 requests
+langchain-google-genai
+langchain-google-genai
+langchain
+langchain_experimental

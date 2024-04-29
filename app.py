@@ -4,12 +4,13 @@ import textwrap
 import google.generativeai as genai
 import firebase_authfunctions as auth_functions
 
-st.set_page_config(layout="wide", page_title="HealthInsight", page_icon="🩺")
+st.set_page_config(layout="wide", page_title="Login - HealthInsight", page_icon="🩺")
 # AIzaSyAC2aMax9s7ev0ZGRFvNn6YlsrkM2c5ahc
 # genai.configure(api_key=st.secrets["api_key"])
 # model = genai.GenerativeModel('gemini-pro')
 
 st.title("HealthInsight V 0.01.0")
+st.header("Login to access the app")
 
 ## -------------------------------------------------------------------------------------------------
 ## Not logged in -----------------------------------------------------------------------------------
@@ -53,6 +54,8 @@ if 'user_info' not in st.session_state:
 else:
     # Show user information
     st.header('User information:')
+    uid = st.session_state.user_info['localId']
+    # st.write(st.session_state.user_info) st.session_state.user_info has all user info to be used later 
     st.write(st.session_state.user_info)
 
     # Sign out
@@ -63,3 +66,4 @@ else:
     st.header('Delete account:')
     password = st.text_input(label='Confirm your password',type='password')
     st.button(label='Delete Account',on_click=auth_functions.delete_account,args=[password],type='primary')
+    st.balloons()
