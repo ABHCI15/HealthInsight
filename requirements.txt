@@ -10,3 +10,4 @@ langchain-google-genai
 langchain-google-genai
 langchain
 langchain_experimental
+tabulate

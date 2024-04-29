@@ -1,7 +1,7 @@
 import streamlit as st 
 import pathlib
 import textwrap
-import google.generativeai as genai
+# import google.generativeai as genai
 import firebase_authfunctions as auth_functions
 
 st.set_page_config(layout="wide", page_title="Login - HealthInsight", page_icon="🩺")
@@ -66,4 +66,4 @@ else:
     st.header('Delete account:')
     password = st.text_input(label='Confirm your password',type='password')
     st.button(label='Delete Account',on_click=auth_functions.delete_account,args=[password],type='primary')
-    st.balloons()
+    st.button("Sleep Analysis", on_click=st.switch_page("pages/sleep.py"))
