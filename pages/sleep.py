@@ -7,6 +7,21 @@ from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe
 import pandas as pd
 import plotly.express as px
 from tools import *
+from langchain_core.tools import Tool
+from langchain_experimental.utilities import PythonREPL
+
+python_repl = PythonREPL()
+
+def scatter_chart(df: pd.DataFrame, x: str, y: str):
+    fig = px.scatter(df, x=x, y=y)
+    return fig
+
+scatter = Tool(
+    name="st.scatter",
+    args=["df", "x", "y"],
+    description="use this tool to plot a scatter plot, the inputs x and y must be valid columns in the dataframe that is passed in.",
+    func=scatter_chart,
+)
 
 from langchain_google_genai import (
     ChatGoogleGenerativeAI,
@@ -39,13 +54,18 @@ def AIGen(sleep_csv):
 def simpleGraph(df):
     st.scatter_chart(df, x="Number of Awakenings", y="Time in Bed")
 
-@st.cache_data
+# @st.cache_data
 def AIgenScatter(sleep_csv):
-    df = pd.read_csv(sleep_csv, skiprows=1)
-    df['Start Time'] = df['Start Time'].apply(parse_date)
-    df['End Time'] = df['End Time'].apply(parse_date)
-    agent = create_pandas_dataframe_agent(GoogleGenerativeAI(model="models/gemini-1.5-pro-latest", temperature=0.5, google_api_key=st.secrets["api_key"], safety_settings={ HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE, HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE, HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE}), df, verbose=True, extra_tools=[graphAgent])
-    return str(agent.invoke("use the tools provided and generate a simple scatter chart, then provide a simple description of what the chart depicts.")['output'])
+    with st.spinner("Loading the data..."):
+        df = pd.read_csv(sleep_csv, skiprows=1)
+        df['Start Time'] = df['Start Time'].apply(parse_date)
+        df['End Time'] = df['End Time'].apply(parse_date)
+        llm = GoogleGenerativeAI(model="models/gemini-1.5-pro-latest", temperature=0.5, google_api_key=st.secrets["api_key"], safety_settings={ HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE, HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE, HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE})
+        agent = create_pandas_dataframe_agent(llm, df, verbose=True, extra_tools=[scatter])
+        columns = df.columns.tolist()
+        result = agent.invoke({"tool": scatter, "df": df, "x": str,"y":str, "input": "use the tools provided and generate a simple scatter chart, then provide a simple description of what the chart depicts." })
+        st.plotly_chart(result)
+        # return str(agent.invoke("use the tools provided and generate a simple scatter chart, then provide a simple description of what the chart depicts.")['output'])
 
 if 'user_info' in st.session_state:
     st.title('Sleep Analysis')
