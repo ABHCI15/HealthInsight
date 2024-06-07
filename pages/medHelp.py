@@ -45,25 +45,25 @@ with st.chat_message("assistant"):
     st.write("Hello 👋, Welcome to Med Q&A, please note that this is not intended to provide medical advice and merely exists as a small research aid.")
 
 text = st.chat_input(placeholder="Type your message here...")
-template = """
-    Answer the following questions as best you can.You are a very helpful medically oriented assistant.
-    If the action does not yield the desired result, you can always try another action or the same action with different input. But always give a final answer.
+template = template = """
+Answer the following questions as best you can. You are a very helpful medically oriented assistant.
+If the action does not yield the desired result, you can always try another action or the same action with different input. But always give a final answer. Feel free to cross reference with other tools after you check pubmed if needed, but minimize use of tavily as it costs financial resources.
 
-            Use the following format:
+Use the following format:
 
-            Question: the input question you must answer
-            Thought: you should always think about what to do
-            Action: the action to take, should be one of the tools you have access to
-            Action Input: the input to the action
-            Observation: the result of the action
-            ... (this Thought/Action/Action Input/Observation can repeat 5 times)
-            Thought: I now know the final answer
-            Final Answer: the final answer to the original input question
+Question: the input question you must answer
+Thought: you should always think about what to do
+Action: the action to take, should be one of the tools you have access to
+Action Input: the input to the action
+Observation: the result of the action
+... (this Thought/Action/Action Input/Observation can repeat 5 times)
+Thought: I now know the final answer
+Final Answer: the final answer to the original input question
 
-            Begin!
+Begin!
 
-            Question: {input}
-            Thought:{agent_scratchpad}
+Question: {input}
+Thought:{agent_scratchpad}
 """
 prompt = PromptTemplate.from_template(template)
 tools = [tool_med, tool_search, tool_wikipedia, tool_wikidata]
@@ -77,13 +77,9 @@ agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 history = StreamlitChatMessageHistory(key="chat_messages") # add user id as key
 
 if prompt :=text:
-    st.chat_message("user").write(prompt)
-    history.add_user_message(prompt)
+    with st.chat_message("user"):
+        st.write(prompt)
     with st.chat_message("assistant"):
-        st_callback = StreamlitCallbackHandler(st.container())
-        response = agent_executor.invoke(
-            {"input": prompt}, {"callbacks": [st_callback]}
-        )
-        formatted_output = response["output"].replace("\\n", "\n")
-        st.markdown(f"```{formatted_output}```")
-        history.add_ai_message(response["output"])
+        out = agent_executor.invoke({"input": prompt})
+        print(out)
+        st.markdown(f"```{out}```")
