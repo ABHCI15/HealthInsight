@@ -19,7 +19,7 @@ def scatter_chart(df: pd.DataFrame, x: str, y: str):
 scatter = Tool(
     name="st.scatter",
     args=["df", "x", "y"],
-    description="use this tool to plot a scatter plot, the inputs x and y must be valid columns in the dataframe that is passed in.",
+    description="use this tool to plot a scatter plot, the inputs x and y must be valid columns in the dataframe that is passed in and don't use action, action input template for this, just use the tool as it is",
     func=scatter_chart,
 )
 
