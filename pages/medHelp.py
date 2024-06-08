@@ -44,9 +44,11 @@ tool_arxiv = ArxivQueryRun(api_wrapper=ArxivAPIWrapper())
 st.markdown(
     """
     <style>
-#st-emotion-cache-ch5dnh ef3psqc5 {
+.st-emotion-cache-ch5dnh {
   visibility: hidden;
+  display: none;
 }
+
 </style>
     """,
     unsafe_allow_html=True
