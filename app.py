@@ -9,7 +9,7 @@ st.set_page_config(layout="wide", page_title="HealthInsight", page_icon="🩺")
 st.markdown(
     """
     <style>
-#st-emotion-cache-ch5dnh ef3psqc5 {
+#.st-emotion-cache-ch5dnh {
   visibility: hidden;
 }
 
