@@ -14,7 +14,7 @@ python_repl = PythonREPL()
 st.markdown(
     """
     <style>
-#MainMenu {
+#GithubIcon {
   visibility: hidden;
 }
 </style>

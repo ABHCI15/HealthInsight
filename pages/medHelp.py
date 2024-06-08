@@ -44,7 +44,7 @@ tool_arxiv = ArxivQueryRun(api_wrapper=ArxivAPIWrapper())
 st.markdown(
     """
     <style>
-#MainMenu {
+#GithubIcon {
   visibility: hidden;
 }
 </style>
