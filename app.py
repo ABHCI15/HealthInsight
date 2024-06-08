@@ -8,7 +8,8 @@ st.set_page_config(layout="wide", page_title="Login - HealthInsight", page_icon=
 
 
 st.title("HealthInsight V 0.01.0")
-st.header("Login to access the app")
+placeholder = st.empty()
+placeholder.header("Login to access the app")
 
 # boilerplate auth code 
 
@@ -53,10 +54,9 @@ if 'user_info' not in st.session_state:
 ## -------------------------------------------------------------------------------------------------
 else:
     # Show user information
-    st.header('User information:')
+    placeholder.header('User information:')
     uid = st.session_state.user_info['localId']
     # st.write(st.session_state.user_info) st.session_state.user_info has all user info to be used later 
-    st.write(st.session_state.user_info)
 
     # Sign out
     st.header('Sign out:')
@@ -66,8 +66,11 @@ else:
     st.header('Delete account:')
     password = st.text_input(label='Confirm your password',type='password')
     st.button(label='Delete Account',on_click=auth_functions.delete_account,args=[password],type='primary')
+    med_switch = st.button(label='Medical Q/A chatbot')
     sleep_Switch =st.button("Sleep Analysis")
     if sleep_Switch:
         st.switch_page("pages/sleep.py")
+    if med_switch:
+        st.switch_page("pages/medHelp.py")
 
 
