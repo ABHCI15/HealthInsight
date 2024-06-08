@@ -11,6 +11,18 @@ from langchain_core.tools import Tool
 from langchain_experimental.utilities import PythonREPL
 
 python_repl = PythonREPL()
+st.markdown(
+    """
+    <style>
+    .css-1jc7ptx, .e1ewe7hr3, .viewerBadge_container__1QSob,
+    .styles_viewerBadge__1yB5_, .viewerBadge_link__1S137,
+    .viewerBadge_text__1JaDK {
+        display: none;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 def scatter_chart(df: pd.DataFrame, x: str, y: str):
     fig = px.scatter(df, x=x, y=y)
@@ -77,8 +89,8 @@ if 'user_info' in st.session_state:
         buttonGraph = st.button("Generate Graphs")
         buttonAiGenScatter = st.button("Generate Gemini Scatter Chart")
         # a simple scatter chart
-        if buttonAiGenScatter:
-            st.write(AIgenScatter(sleep_csv))
+        # if buttonAiGenScatter:
+        #     st.write(AIgenScatter(sleep_csv))
         if buttonGraph:
             df = pd.read_csv(sleep_csv, skiprows=1)
             simpleGraph(df)
