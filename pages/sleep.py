@@ -14,7 +14,7 @@ python_repl = PythonREPL()
 st.markdown(
     """
     <style>
-#GithubIcon {
+#st-emotion-cache-ch5dnh ef3psqc5 {
   visibility: hidden;
 }
 </style>

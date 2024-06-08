@@ -9,7 +9,7 @@ st.set_page_config(layout="wide", page_title="HealthInsight", page_icon="🩺")
 st.markdown(
     """
     <style>
-#GithubIcon {
+#st-emotion-cache-ch5dnh ef3psqc5 {
   visibility: hidden;
 }
 
