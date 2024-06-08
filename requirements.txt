@@ -14,3 +14,4 @@ tabulate
 langchain-community 
 arxiv
 wikipedia
+mediawikiapi
