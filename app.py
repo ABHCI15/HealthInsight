@@ -8,9 +8,11 @@ st.set_page_config(layout="wide", page_title="HealthInsight", page_icon="🩺")
 
 st.markdown(
     """
+    <style>
 #MainMenu {
   visibility: hidden;
 }
+</style>
     """,
     unsafe_allow_html=True
 )
