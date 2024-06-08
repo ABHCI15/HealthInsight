@@ -17,3 +17,4 @@ wikipedia
 mediawikiapi
 langchain_core
 wikibase-rest-api-client
+xmltodict
