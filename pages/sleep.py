@@ -13,9 +13,9 @@ from langchain_experimental.utilities import PythonREPL
 python_repl = PythonREPL()
 st.markdown(
     """
-    #GithubIcon {
-    visibility: hidden;
-    }
+#MainMenu {
+  visibility: hidden;
+}
     """,
     unsafe_allow_html=True
 )

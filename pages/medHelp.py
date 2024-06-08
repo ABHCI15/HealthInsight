@@ -43,9 +43,9 @@ tool_search = TavilySearchResults()
 tool_arxiv = ArxivQueryRun(api_wrapper=ArxivAPIWrapper())
 st.markdown(
     """
-    #GithubIcon {
-    visibility: hidden;
-    }
+#MainMenu {
+  visibility: hidden;
+}
     """,
     unsafe_allow_html=True
 )

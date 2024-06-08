@@ -8,9 +8,9 @@ st.set_page_config(layout="wide", page_title="HealthInsight", page_icon="🩺")
 
 st.markdown(
     """
-    #GithubIcon {
-    visibility: hidden;
-    }
+#MainMenu {
+  visibility: hidden;
+}
     """,
     unsafe_allow_html=True
 )
