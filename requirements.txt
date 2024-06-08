@@ -11,5 +11,6 @@ langchain-google-genai
 langchain
 langchain_experimental
 tabulate
-langchain-community arxiv
-langchain-community wikipedia
+langchain-community 
+arxiv
+wikipedia
