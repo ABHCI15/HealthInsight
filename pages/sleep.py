@@ -57,7 +57,7 @@ def AIGen(sleep_csv):
         df = pd.read_csv(sleep_csv, skiprows=1)
         df['Start Time'] = df['Start Time'].apply(parse_date)
         df['End Time'] = df['End Time'].apply(parse_date)
-        agent = create_pandas_dataframe_agent(GoogleGenerativeAI(model="models/gemini-1.5-pro-latest", temperature=0.5, google_api_key=st.secrets["api_key"], safety_settings={ HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE, HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE, HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE}), df, verbose=True)
+        agent = create_pandas_dataframe_agent(GoogleGenerativeAI(model="models/gemini-1.5-pro-latest", temperature=0.5, google_api_key=st.secrets["api_key"], safety_settings={ HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE, HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE, HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE}), df, verbose=True, allow_dangerous_code=True)
         return str(agent.invoke("Provide Health Insight/Sleep report into the sleep data, and find patterns in the different columns excluding start and end time, provide details such as average sleep time, deep sleep etc. with accuracy")['output'])
 
 
